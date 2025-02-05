@@ -40,5 +40,17 @@ app.get('/inventory', function(req,res){
     });
 });
 
+app.get('/inventory/fresh', function(req,res){
+    db.all("SELECT * FROM bakery WHERE DATE('now') - DATE(date) < 7", function(err,rows){
+        res.jsonp(rows);
+    });
+});
+
+app.get('/inventory/cheap', function(req,res){
+    db.all("SELECT * FROM bakery ORDER BY price", function(err,rows){
+        res.jsonp(rows);
+    });
+});
+
 app.listen(4000);
 console.log("Site Loaded");
