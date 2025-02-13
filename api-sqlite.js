@@ -1,10 +1,13 @@
+//establish variables
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('bakeryDB');
 
+//check if db exists and create it if it doesn't
 db.serialize(function() {
     db.run("CREATE TABLE IF NOT EXISTS bakery (name VARCHAR(30) NOT NULL, allergens VARCHAR(50), price DOUBLE NOT NULL, date DATE NOT NULL)");
-    db.run("DELETE FROM bakery");
-
+    //delete any data currently present in db
+    db.run("DELETE * FROM bakery");
+    //insert data into database
     db.run("INSERT INTO bakery (name, allergens, price, date) VALUES (?,?,?,?)","Peanut Butter Brownies", "peanuts", 2.49, "2025-01-29");
     db.run("INSERT INTO bakery (name, allergens, price, date) VALUES (?,?,?,?)","Chocolate Chip Cookie", null, 1.49, "2025-01-26");
     db.run("INSERT INTO bakery (name, allergens, price, date) VALUES (?,?,?,?)","Vanilla Macaron", "Almond", 2.99, "2025-02-03");
@@ -27,30 +30,31 @@ db.serialize(function() {
     db.run("INSERT INTO bakery (name, allergens, price, date) VALUES (?,?,?,?)","Sourdough", null, 7.99, "2025-02-03");
 });
 
+//call express
 var express = require ('express');
 var app = express();
-
+//direct users when they first type the web address
 app.get('/', function(req, res){
     res.send("Welcome to Sunderland Bakery!")
 })
-
+//direct users to bakery inventory
 app.get('/inventory', function(req,res){
     db.all("SELECT * FROM bakery", function(err,rows){
         res.jsonp(rows);
     });
 });
-
+//sort bakery inventory by freshness
 app.get('/inventory/fresh', function(req,res){
-    db.all("SELECT * FROM bakery WHERE DATE('now') - DATE(date) < 7", function(err,rows){
+    db.all("SELECT * FROM bakery ORDER BY date DESC", function(err,rows){
         res.jsonp(rows);
     });
 });
-
+//sort bakery inventory by price from low to high
 app.get('/inventory/cheap', function(req,res){
     db.all("SELECT * FROM bakery ORDER BY price", function(err,rows){
         res.jsonp(rows);
     });
 });
-
+//load site & display on console
 app.listen(4000);
 console.log("Site Loaded");
