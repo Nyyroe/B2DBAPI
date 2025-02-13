@@ -6,7 +6,7 @@ var db = new sqlite3.Database('bakeryDB');
 db.serialize(function() {
     db.run("CREATE TABLE IF NOT EXISTS bakery (name VARCHAR(30) NOT NULL, allergens VARCHAR(50), price DOUBLE NOT NULL, date DATE NOT NULL)");
     //delete any data currently present in db
-    db.run("DELETE * FROM bakery");
+    db.run("DELETE FROM bakery");
     //insert data into database
     db.run("INSERT INTO bakery (name, allergens, price, date) VALUES (?,?,?,?)","Peanut Butter Brownies", "peanuts", 2.49, "2025-01-29");
     db.run("INSERT INTO bakery (name, allergens, price, date) VALUES (?,?,?,?)","Chocolate Chip Cookie", null, 1.49, "2025-01-26");
