@@ -7,9 +7,11 @@
         "apidoc": "apidoc -i routes/ -o apidoc/"
     },
     "dependencies": {
-        "express":"5.1.0",
-        "sqlite": "5.1.1",
-        "cors": "2.8.5"
-
+        "cors": "2.8.5",
+        "express": "5.1.0",
+        "sqlite": "5.1.1"
+    },
+    "devDependencies": {
+        "apidoc": "^1.2.0"
     }
 }

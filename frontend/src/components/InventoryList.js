@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
+import SearchFilter from './SearchFilter';
 import axios from 'axios';
 
 function InventoryList(){
@@ -18,13 +19,25 @@ function InventoryList(){
         });
     };
     
+    // Filter function passed to SearchFilter
+    const handleFilter = (term) => {
+    const filtered = bakedGoods.filter(item =>
+      item.name.toLowerCase().includes(term.toLowerCase()) ||
+      item.allergens.toLowerCase().includes(term.toLowerCase())
+    );
+    setFilteredGoods(filtered);
+  };
     return(
         <div>
             <h2>All Inventory</h2>
+            
+            {/* Search bar */}
+            <SearchFilter onFilter={handleFilter} />
+            
             <ul>
                 {inventory.map(item => (
                     <li key={item.id}>
-                        {item.name} - ${item.price} - Made: {item.date} - Allergens: {item.allergens} {' '}
+                        {item.name} - £{item.price} - Made: {item.date} - Allergens: {item.allergens} {' '}
                         <Link to= {'/inventory/edit/${item.id}'}>Edit</Link>
                         {' '}
                         <button onClick={() => handleDelete(item.id)}>Delete</button>

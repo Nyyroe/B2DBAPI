@@ -1,6 +1,9 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
+//import stylesheet (i thought id use this more but whatever)
+import './styles.css';
+
 //import page components
 import Home from './components/Home';
 import InventoryList from './components/InventoryList';

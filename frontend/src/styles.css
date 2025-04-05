@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 2rem;
+    background: #fdf6f0;
+    color: #333;
+  }
+  
+  h1, h2 {
+    color: #b35c1e;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    background: white;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  input, button {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  button {
+    background-color: #f2a154;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #e5953f;
+  }
+  
