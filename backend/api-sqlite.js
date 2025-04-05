@@ -55,29 +55,6 @@ app.get('/inventory/cheap', function(req,res){
         res.jsonp(rows);
     });
 });
-//POST to inventory page
-app.post('/inventory', (req, res) => {
-    const {name, allergens, price, date} = req.body;
-    db.run('INSERT INTO bakery (name, allergens, price, date) VALUES (?, ?, ?, ?)', [name, allergens, price, date],
-        //error handling
-        function (err) {
-            if (err) return res.status(400).json({error: err.message});
-        res.json({id: this.lastID, name, allergens, price, date});
-        }
-    );
-});
-//PUT functionality for inventory editing
-app.put('/inventory/:id',(req, res) => {
-    const {name, allergens, price, date} = req.body;
-    db.run('UPDATE bakery SET name = ?, allergens = ?, price = ?, date = ? WHERE id = ?',
-        [name, allergens, price, date, req.params.id],
-        function (err) {
-            if (err) return res.status(400).json({error: err.message});
-        res.json({message: 'Item Updated'});
-        }
-    );
-});
-
 //load site & display on console
 app.listen(4000);
 console.log("Site Loaded");
