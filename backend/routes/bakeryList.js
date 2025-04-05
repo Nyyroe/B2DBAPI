@@ -1,6 +1,6 @@
-var express = require('express'); 
-var db = require('../db'); //Connect to SQLite database
-var router = express.Router(); //create router
+const express = require('express'); 
+const db = require('../db'); //Connect to SQLite database
+const router = express.Router(); //create router
 
 //GET commands
 //Fetch all baked goods from the database
@@ -20,7 +20,7 @@ router.get('/', (req,res) => {
 
 //Fetch a single baked good from the list by its ID
 router.get('/:id', (req, res) => {
-    var id = req.params.id;
+    const id = req.params.id;
     db.get('SELECT * FROM bakery WHERE id = ?', [id], (err,row) => {
         if (err) {
             res.status(500).json({error: err.message});
@@ -34,8 +34,8 @@ router.get('/:id', (req, res) => {
 //POST commands
 //Update an existing inventory item
 router.put('/:id', (req, res) => {
-    var id= req.params.id;
-    var {name, allergens, price, date} = req.body;
+    const id= req.params.id;
+    const {name, allergens, price, date} = req.body;
 
     db.run('UPDATE bakery SET name = ?, allergens = ?, price = ?, date = ? WHERE id = ?',   [name, allergens, price, date, id],
         function (err) {
@@ -52,7 +52,7 @@ router.put('/:id', (req, res) => {
 //DELETE commands
 //Remove a baked good from the inventory with it's ID
 router.delete('/:id', (req, res) => {
-    var id = req.params.id;
+    const id = req.params.id;
 
     db.run('DELETE FROM bakery WHERE id = ?', [id], function (err){
         if (err) {

@@ -3,16 +3,16 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 function InventoryList(){
-    var [inventory, setInventory] = useState([]);
+    const [inventory, setInventory] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:4000/inventory')
+        axios.get('http://localhost:4000/bakeryList')
         .then(response => setInventory(response.data))
         .catch(error => console.error('Error loading inventory: ', error));
     }, []);
 
-    var handleDelete = (id) => {
-        axios.delete('http://localhost:4000/inventory/${id}')
+    const handleDelete = (id) => {
+        axios.delete('http://localhost:4000/bakeryList/${id}')
         .then(() => {
             setInventory(inventory.filter(item => item.id !== id));
         });

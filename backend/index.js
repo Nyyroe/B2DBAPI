@@ -1,12 +1,12 @@
 //import required modules
-var express = require('express'); //web framework
-var cors = require('cors'); //allows communication between frontend & backend
-var invRoutes = require('./routes/inventory'); //import API routes
+const express = require('express'); //web framework
+const cors = require('cors'); //allows communication between frontend & backend
+const invRoutes = require('./routes/bakeryList'); //import API routes
 
-var app = express ();
+const app = express ();
 app.use(cors());
 app.use(express.json());
-app.use('/inventory', invRoutes);
+app.use('/bakeryList', invRoutes);
 
 //start server
 app.listen(4000, () => {
