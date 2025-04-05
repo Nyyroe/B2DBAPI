@@ -1,0 +1,15 @@
+{
+    "name": "bakery-backend",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "apidoc": "apidoc -i routes/ -o apidoc/"
+    },
+    "dependencies": {
+        "express":"5.1.0",
+        "sqlite": "5.1.1",
+        "cors": "2.8.5"
+
+    }
+}
